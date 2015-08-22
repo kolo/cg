@@ -1,0 +1,5 @@
+require_relative 'cg/game'
+require_relative 'cg/player'
+require_relative 'cg/turn'
+require_relative 'cg/play'
+require_relative 'cg/card'

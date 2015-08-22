@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'bundler/setup'
+
+require 'byebug'
+
+require_relative '../lib/cg'
+
+game = Game.new(Player.new('P1'), Player.new('P2'))
+while !game.end_of_game
+  game.next_play
+end
