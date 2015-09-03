@@ -1,23 +1,18 @@
 class Game
   def initialize(player, opponent)
-    @player = player
-    @opponent = opponent
+    @history = [Turn.new(opponent, player, 0)]
+    @turn = Turn.new(player, opponent, 1)
   end
 
   def end_of_game
-    @player.dead? || @opponent.dead?
+    @turn.end_of_game?
   end
 
   def next_play
-    play = @player.next_play
-    if play.end_of_turn?
-      puts '%s: end of turn' % [@player.name]
-      @player, @opponent = @opponent, @player
-    else
-      play.apply(@player, @opponent)
-      puts '%s: %d hp; %s: %d hp' % [
-        @player.name, @player.hp, @opponent.name, @opponent.hp
-      ]
+    @turn.next_play
+    if @turn.end_of_turn?
+      @history << @turn
+      @turn = @history[-2].new
     end
   end
 end

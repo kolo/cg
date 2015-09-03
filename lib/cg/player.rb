@@ -1,21 +1,16 @@
-PLAYER_STARTING_HP = 30
-
 class Player
   attr_reader :name, :hp
 
   def initialize(name)
     @name = name
-    @hp = PLAYER_STARTING_HP
-    @turn = Turn.new
+    @hp = 30
   end
 
-  def next_play
-    @turn = @turn.new if @turn.ended?
-
-    if @turn.mana_left > 0
-      @turn.play(PlayCard.new(Card.new))
+  def next_play(mana)
+    if mana > 0
+      PlayCard.new(Card.new)
     else
-      @turn.play(EndTurn.new)
+      EndTurn.new
     end
   end
 
